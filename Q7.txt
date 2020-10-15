@@ -1,5 +1,5 @@
 (defun triangle(n)
-    (if (integerp n);if is an integer, determine the sign 
+    (if (integerp n) ;if an integer, determine the sign 
           (if (zerop n) ;if this is a zero
               (write-line "invalid number; please enter a positive or a negative integer")
               (if (> n 0) ;if this input is positive
@@ -19,8 +19,7 @@
                     (write-line"")) ;new line
                 )
          )
-        ;if not an integer
-        (write-line "invalid number; please enter a positive or a negative integer")))
+         (write-line "invalid number; please enter a positive or a negative integer"))) ;else not an integer
 
 (triangle 7)
 (triangle 4)

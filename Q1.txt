@@ -1,1 +1,14 @@
+(defun sub-list (listInput fromIndex toIndex)
+    (assist-sub-list(listInput fromIndex toIndex 1))
+)
 
+(defun assist-sub-list (listInput fromIndex toIndex position)
+    (if (> fromIndex toIndex) nil ;fromIndex can't be higher than toIndex
+        (if (< position fromIndex) ;ignores until we reach fromIndex
+            (assist-sub-list((cdr listInput) fromIndex toIndex (+ position 1)))
+            (if (< position toIndex) ;construct a list from fromIndex to toIndex
+                (cons (car listInput) (assist-sub-list((cdr listInput) fromIndex toIndex (+ position 1)))) 
+            )
+        ) 
+    )  
+)

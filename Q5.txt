@@ -1,9 +1,9 @@
-(defun binary-search (L)
+(defun binary-search (aList)
     (cond 
-        ((null L) T)
-        ((and (not (null (car (car (cdr L))))) (< (car L) (car (car (cdr L))))) nil)
-        ((and (not (null (car (car (cdr (cdr L)))))) (> (car L) (car (car (cdr (cdr L)))))) nil)
-        (t (and (binary-search (car (cdr L))) (binary-search (car (cdr L)))))))
+        ((null aList) T)
+        ((and (not (null (car (car (cdr aList))))) (< (car aList) (car (car (cdr aList))))) nil)
+        ((and (not (null (car (car (cdr (cdr aList)))))) (> (car aList) (car (car (cdr (cdr aList)))))) nil)
+        (t (and (binary-search (car (cdr aList))) (binary-search (car (cdr aList)))))))
     
 
 

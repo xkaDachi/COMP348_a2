@@ -26,7 +26,7 @@
           )
       )
     )
- ; )
+ ;)
 )
 
 
@@ -34,7 +34,7 @@
 (print (sub-list '(1 6 12) 1 2)) ;from assignment
 (print (sub-list '(1 6 12) 1 3)) ;from assignment
 (print (sub-list '(1 6 12) 4 2)) ;from assignment
-
+(print (sub-list '(1 6 12) 0 2)) ;can't be zero
 (print (sub-list '(1 6 12) 3 2)) ;fromIndex > toIndex
 (print (sub-list  '(1 6 12) -3 3)) ;fromIndex is negative
 (print (sub-list '(1 6 12) 4 -2)) ;toIndex is negative

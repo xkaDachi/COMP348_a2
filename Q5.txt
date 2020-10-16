@@ -1,1 +1,10 @@
+(defun binary-search (L)
+    (cond 
+        ((null L) T)
+        ((and (not (null (car (car (cdr L))))) (< (car L) (car (car (cdr L))))) nil)
+        ((and (not (null (car (car (cdr (cdr L)))))) (> (car L) (car (car (cdr (cdr L)))))) nil)
+        (t (and (binary-search (car (cdr L))) (binary-search (car (cdr L)))))))
+    
 
+
+(print(binary-search '(8 (3 (1 () ()) (6 (4 () ())( 7 () ()))) (10 (()) (14 (13) ())))))

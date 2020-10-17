@@ -1,14 +1,23 @@
+; take the list and make a list of only atoms NO nested lists
+(defun extract_elements(alist)
+    (cond ((null alist) '()) ; if alist is null return empty list
+        ((listp (car alist)) (append (extract_elements(car alist)) (extract_elements(cdr alist)))) ; if head of alist is a list append to extract
+        (t (cons (car alist)(extract_elements(cdr alist)))) ; else construct list with all elements
+    )    
+) 
 
-; create a list of only atoms no nested list. Then find a way to convert list to set.
-; create list with only numbers
 (defun flatten-numbers (alist)
-    ; check if head of list is a number or a nested list
-    (if (or (numberp (car alist)) (listp (car alist)))
-        ; check if head is a nested list and if head of nested list is a number
-        (if (and (listp (car alist)) (numberp (car(car alist)))) 
-            ((list (car (car alist)) (flatten-numbers (car (cdr alist))))))
-        
-        (if (atom (car alist))
-            (list (car alist) (flatten-numbers(cdr alist)))))
-        
-    (flatten-numbers (cdr alist)))
+    (setq list1 (extract_elements alist)) ; create list1 with ONLY ELEMENTS
+    (setq list2 '()) ; create list2
+    (cond ((null list1) '()) ; if alist is empty return empty list
+        (t (dotimes (x (length list1) list2) ; dotimes loop where limit is the length of list1 and the result is list2
+            (if (or (member (car list1) list2) (not(numberp (car list1))))
+                () ; if head is already a member of the list do nothing
+                (setf list2 (append list2 (list (car list1))))) ; else put element in list2
+            (setf list1 (cdr list1))) ; move on with the tail (take off the head and dotimes loop again)
+        ))
+
+)
+
+(print (extract_elements '((1 5) 6 2 4 g 5 h s (7 4) (4) 6))) ;test for extract_elements
+(print (flatten-numbers '((1 5) 6 2 4 g 5 h s (7 4) (4) 6))) ;test for flatten-numbers

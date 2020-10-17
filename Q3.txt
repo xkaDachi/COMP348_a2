@@ -1,1 +1,14 @@
 
+; create a list of only atoms no nested list. Then find a way to convert list to set.
+; create list with only numbers
+(defun flatten-numbers (alist)
+    ; check if head of list is a number or a nested list
+    (if (or (numberp (car alist)) (listp (car alist)))
+        ; check if head is a nested list and if head of nested list is a number
+        (if (and (listp (car alist)) (numberp (car(car alist)))) 
+            ((list (car (car alist)) (flatten-numbers (car (cdr alist))))))
+        
+        (if (atom (car alist))
+            (list (car alist) (flatten-numbers(cdr alist)))))
+        
+    (flatten-numbers (cdr alist)))

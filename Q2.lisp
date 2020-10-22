@@ -6,9 +6,7 @@
     (if (> fromIndex toIndex)
         (reverse (assist-sub-list listInput toIndex fromIndex 1)) ;reverse helper function
         (assist-sub-list listInput fromIndex toIndex 1))))  ;helper function               
-    
-    
-     
+
 ;user-defined length function
 (defun myLength (aList)
   (if aList

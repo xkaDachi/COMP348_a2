@@ -29,9 +29,7 @@
 (print (sub-list '(1 6 12) nil 3))       ;from assignment Q1 but removed fromIndex so defaults to (1)
 (print (sub-list '(1 6 12)))             ;from assignment Q1 but removed both fromIndex and toIndex so defaults to (1) and (myLength inputList)
 
-(print (sub-list '(1 6 12) 2))          ;from assignment
-
-(print (sub-list '(1 6 12) 3 1))        ;from assignment
-
-(print (sub-list '(1 6 12) nil 1))      ;from assignment
+(print (sub-list '(1 6 12) 2))          ;from assignment Q2
+(print (sub-list '(1 6 12) 3 1))        ;from assignment Q2
+(print (sub-list '(1 6 12) nil 1))      ;from assignment Q2
 

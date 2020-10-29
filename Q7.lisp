@@ -7,7 +7,8 @@
                    do (loop for b from a to n
                        do (write '*)
                             )
-                    (write-line "")) ;new line
+                    (write-line "")) ;write a new line
+                  
                  ;else this input is negative
                 (loop for a from n to -1
                    do ;print out the space as one line frist
@@ -22,11 +23,15 @@
          (write-line "invalid number; please enter a positive or a negative integer"))) ;else not an integer
 
 (triangle 7)
+(write-line "")
 (triangle 4)
+(write-line "")
 (triangle -5)
+(write-line "")
 (triangle 1)
+(write-line "")
 (triangle -1)
-
+(write-line "")
 (triangle 0)
 (triangle 2.5)
 (triangle '(Hello World!))

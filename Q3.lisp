@@ -5,6 +5,8 @@
         (t (cons (car alist)(extract(cdr alist)))) ; else construct list with all elements
     )    
 ) 
+(defvar list1 nil)
+(defvar list2 nil)
 
 (defun flatten-numbers (alist)
     (setq list1 (extract alist)) ; create list1 with ONLY ELEMENTS
@@ -16,7 +18,6 @@
                 (setf list2 (append list2 (list (car list1))))) ; else put element in list2
             (setf list1 (cdr list1))) ; move on with the tail (take off the head and dotimes loop again)
         ))
-
 )
 
 (print (extract '((1 5) 6 2 4 g 5 h s (7 4) (4) 6))) ;test for extract

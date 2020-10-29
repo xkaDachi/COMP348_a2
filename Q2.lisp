@@ -4,7 +4,7 @@
 
   (if (or (> fromIndex (myLength listInput)) (> toIndex (myLength listInput))) nil   ;indexes cannot be out of bounds & calling this here because myLength will change in each recursive calls
     (if (> fromIndex toIndex)
-        (reverse (assist-sub-list listInput toIndex fromIndex 1)) ;reverse helper function
+        (myReverse (assist-sub-list listInput toIndex fromIndex 1)) ;reverse helper function
         (assist-sub-list listInput fromIndex toIndex 1))))  ;helper function               
 
 ;user-defined length function
@@ -12,6 +12,12 @@
   (if aList
     (+ 1 (myLength (cdr aList)))
     0))
+
+;user-defined reverse function
+(defun myReverse (listInput)
+  (cond
+    ((null listInput) '())
+    (T (append (myReverse (cdr listInput)) (list (car listInput))))))
   
 ;helper function
 (defun assist-sub-list (listInput fromIndex toIndex position)
@@ -30,4 +36,3 @@
 (print (sub-list '(1 6 12) 2))          ;from assignment Q2
 (print (sub-list '(1 6 12) 3 1))        ;from assignment Q2
 (print (sub-list '(1 6 12) nil 1))      ;from assignment Q2
-

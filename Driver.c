@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include "Q9.h"
 #include "Q10.h"
-
-int arr[] = { 1, 4, 5, 6, -1 };
+#include "Q11.h"
 
 int main() {
     
@@ -23,8 +22,27 @@ int main() {
    printf("\n");
 
    //Question 11
-  
+   int arr2[] = { 1, 4, 5, 6, -1 };
+   int* aFctPtr = NULL;
+   int* aPtr;
+   aPtr = selectionSortQ11(arr2, 5, aFctPtr);
+   for (i = 0; i < 5; i++)
+       printf("%d", aPtr[i]);
 
+   aFctPtr = &findmin;
+   aPtr = selectionSortQ11(arr2, 5, aFctPtr);
+   for (i = 0; i < 5; i++)
+       printf(" %d", aPtr[i]);
+
+   printf("\n");
+
+   //Question 12
+   //something goes here
+
+   printf("\n");
+
+   //Question 13
+   //something goes here
 
     return 0;
 }

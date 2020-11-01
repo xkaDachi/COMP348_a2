@@ -3,6 +3,7 @@
 #include "Q9.h"
 #include "Q10.h"
 #include "Q11.h"
+#include "Q12.h"
 
 int main() {
     
@@ -37,7 +38,31 @@ int main() {
    printf("\n");
 
    //Question 12
-   //something goes here
+   //testing functions
+   int arr3[] = { 1, 4, 5, 6, -1 };
+   int* n = findmax(arr3, 5);
+   printf("%d ", *n); // 6
+
+   float average = findAvg(arr3, 5);
+   printf("%f ", average);
+
+   aFctPtr = &findmax;
+   aPtr = selectionSortQ11Inverse(arr3, 5, aFctPtr);
+   for (i = 0; i < 5; i++)
+       printf(" %d", aPtr[i]);
+
+   //actual Q12
+   int* dynamicArray;
+   dynamicArray = (int*)malloc(sizeof(int) * 5);      // allocate 5 ints
+   dynamicArray[0] = 1;
+   dynamicArray[1] = 4;
+   dynamicArray[2] = 5;
+   dynamicArray[3] = 6;
+   dynamicArray[4] = -1;
+   printf("\n");
+   question12Function(dynamicArray, 5);
+   //delete dynamic array here...
+   dynamicArray = NULL;
 
    printf("\n");
 

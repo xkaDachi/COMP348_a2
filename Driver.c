@@ -1,10 +1,10 @@
 #pragma once
 #include <stdio.h>
 #include <math.h>
-#include "Q9.h"
-#include "Q10.h" //#include "selectionsort.h"
-#include "Q10.h" //#include "selectionsort.h" // included twice
-#include "Q11.h"
+#include "findmin.h"
+#include "selectionsort.h" //#include "selectionsort.h"
+#include "selectionsort.h" //#include "selectionsort.h" // included twice
+#include "selectionsortQ11.h"
 #include "Q13.h"
 
 /*
@@ -15,7 +15,7 @@
 */
 void question12Function(int* array, int size); //will call all functions
 int* findmax(int* arr, int size); //and findmin is in Q9 files.
-int* selectionSortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionSortQ11 is in Q11 files
+int* selectionsortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionSortQ11 is in Q11 files
 float findAvg(int* array, int size);
 float findSD(int* array, int size);
 
@@ -30,39 +30,42 @@ int main() {
     printf("\n");
     printf("\n");
 
+   //----------------------------------------------------------------------------------------------------
    //Question 10
-    printf("Question 10: \n");
+   printf("Question 10: \n");
    int i;
-   selectionSort(arr, 5);
+   selectionsort(arr, 5);
    for (i = 0; i < 5; i++) 
      printf("%d ", arr[i]);
 
    printf("\n");
    printf("\n");
 
+   //----------------------------------------------------------------------------------------------------
    //Question 11
    printf("Question 11: \n");
    int arr2[] = { 1, 4, 5, 6, -1 };
    int* aFctPtr = NULL;
    int* aPtr;
-   aPtr = selectionSortQ11(arr2, 5, aFctPtr); //will give garbage value because aFctPtr = NULL
+   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //will give garbage value because aFctPtr = NULL
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
    printf("\n");
    aFctPtr = &findmin;
-   aPtr = selectionSortQ11(arr2, 5, aFctPtr); //will not give garbage value because aFctPtr = &findmin
+   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //will not give garbage value because aFctPtr = &findmin
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
 
    printf("\n");
    printf("\n");
 
+   //----------------------------------------------------------------------------------------------------
    //Question 12
    printf("Question 12: \n");
    int* dynamicArray;
    dynamicArray = (int*)malloc(sizeof(int)*5);      // allocate 5 ints
    if (dynamicArray == NULL) {
-	   printf("Unable to create array.");
+	   printf("Unable to allocate memory for a dynamic array.");
    } else {
    dynamicArray[0] = 1;
    dynamicArray[1] = 4;
@@ -76,21 +79,24 @@ int main() {
 
    printf("\n");
 
+   //----------------------------------------------------------------------------------------------------
    //Question 13
    printf("Question 13: \n");
    //stores each word
-   char word[MAX] = { '\0' };
+   char word[256] = { '\0' };
    //stores a pointer to the 1st node in the linked list
    NodePointer head = NULL;
    //keep inserting until user enters "quit"
    while (0 != strcmp(word, QUIT)) {
 	   printf("Enter a word to INSERT into linked list (enter '.' to quit): ");
-	   scanf("%s", word);
+	   getstring(word, 256);
        if (0 != strcmp(word, QUIT)) {
+		   
            insert_dictionary_order(word, &head);
            print_list(head);
        }
    }//end of while
+
     return 0;
 }
 
@@ -111,41 +117,6 @@ int* findmin(int* arr, int size) {
     return smallestAddress;
 }
 
-/*
-* findMin definition with 3 arguments
-* In case the pointer is NULL, 
-* the default function (the original findmin) is to be called.
-*/
-int* selectionSortQ11(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
-    int* minPtr;
-    int temp;
-    int indexMin = 0;
-    int indexCurrent = 0;
-    int originalSize = size;
-
-    if (findminPtr == NULL) {
-        return minPtr = findmin(array, size);
-    }
-    else {
-        while (size != 0) {
-
-            minPtr = findmin(array, size);
-
-            for (int i = 0; i < size; i++) {
-                if (&array[i] == minPtr) {
-                    indexMin = i;
-                }
-            }
-            temp = array[indexCurrent];
-            array[indexCurrent] = array[indexMin];
-            array[indexMin] = temp;
-            array = array + 1;
-            size--;
-        }
-        return array = array - originalSize;
-    }
-}
-
 //Find the biggest Value
 int* findmax(int* arr, int size) {
 	int biggestAddress = &arr[0];
@@ -161,7 +132,7 @@ int* findmax(int* arr, int size) {
 }
 
 //Sort by Descending Order
-int* selectionSortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
+int* selectionsortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
 	int* maxPtr;
 	int temp;
 	int indexMax = 0;
@@ -227,13 +198,13 @@ void question12Function(int* array, int size) {
 	float average;
 	float sD;
 
-	ascendingArr = selectionSortQ11(array, size, ascendingFctPter);
+	ascendingArr = selectionsortQ11(array, size, ascendingFctPter);
 	printf("Array Sorted in Ascending Order: ");
 	for (int i = 0; i < size; i++)
 		printf("%d ", ascendingArr[i]);
 	printf("\n");
 
-	descendingArr = selectionSortQ11Inverse(array, size, descendingFctPter);
+	descendingArr = selectionsortQ11Inverse(array, size, descendingFctPter);
 	printf("Array Sorted in Descending Order: ");
 	for (int i = 0; i < size; i++)
 		printf("%d ", descendingArr[i]);

@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define QUIT "." //end the loop
-#define END_OF_STRING '\0'
+#define QUIT "." //end the loop call with user input as '.'
 
 /*
 * struct Node to be used for ''LinkedList'' behavior

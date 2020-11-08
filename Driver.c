@@ -15,7 +15,7 @@
 */
 void question12Function(int* array, int size); //will call all functions
 int* findmax(int* arr, int size); //and findmin is in Q9 files.
-int* selectionsortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionSortQ11 is in Q11 files
+int* selectionsortQ11Inverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionsortQ11 is in Q11 files
 float findAvg(int* array, int size);
 float findSD(int* array, int size);
 
@@ -84,19 +84,21 @@ int main() {
    printf("Question 13: \n");
    //stores each word
    char word[256] = { '\0' };
+   char input[256] = { '\0' };
    //stores a pointer to the 1st node in the linked list
    NodePointer head = NULL;
    //keep inserting until user enters "quit"
-   while (0 != strcmp(word, QUIT)) {
+   while (0 != strcmp(input, QUIT)) {
 	   printf("Enter a word to INSERT into linked list (enter '.' to quit): ");
-	   getstring(word, 256);
-       if (0 != strcmp(word, QUIT)) {
-		   
-           insert_dictionary_order(word, &head);
-           print_list(head);
-       }
+	   gets(word);
+	   strcpy(input, word);
+	   char* token = strtok(word, " "); // Extract the first token
+	   while (token != NULL) { // loop through the string to extract all other tokens
+		   insert_dictionary_order(token, &head);
+		   print_list(head);
+		   token = strtok(NULL, " ");
+	   }
    }//end of while
-
     return 0;
 }
 

@@ -53,10 +53,10 @@ void insert_dictionary_order(char string[], NodePointer* head) {
 void print_list(NodePointer head) {
     //for empty list
     if (NULL == head) {
-        printf("The dictionary is empty!\n\n");
+        printf("The Dictionary is empty!\n\n");
         return;
     }
-    printf("Dictionary has: ");
+    printf("Dictionary is the following: ");
     //loop through linkedlist
     while (NULL != head) {
         //display each node

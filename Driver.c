@@ -4,25 +4,13 @@
 #include <math.h>
 #include "Q13.h"
 
-//								 ----------------------------------
-//								 | INTERNAL FUNCTION DECLARATIONS |
-//								 ----------------------------------
+//									 --------------------------
+//									 |  FUNCTION DECLARATIONS |
+//									 --------------------------
 /*
 * findmin declaration for Q9
 */
-int* findmin(int* arr, int size);
-
-/*
-* function declaration for Q12 (local functions).
-* read an array of n integers, sorts them in both ascending and descending order, 
-* and prints the sorted arrays, along with the minimum, maximum, average, and the standard deviation
-* findmax function is to be implemented locally in the main program.
-*/
-void question12Output(int* array, int size); //will call all functions
-int* findmax(int* arr, int size); //and findmin is in Q9 files.
-int* selectionsortInverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionsortQ11 is in Q11 files
-float findAvg(int* array, int size);
-float findSD(int* array, int size);
+int* findminQ9(int* arr, int size);
 
 //										-----------------
 //										| MAIN FUNCTION |
@@ -33,7 +21,7 @@ int main() {
     //Question Q9
     printf("Question 9: \n");
     int arr[] = { 1, 4, 5, 6, -1 };
-    int* m = findmin(arr, 5);
+    int* m = findminQ9(arr, 5);
     printf("%d", *m); // -1
 
     printf("\n");
@@ -56,12 +44,14 @@ int main() {
    int arr2[] = { 1, 4, 5, 6, -1 };
    int* aFctPtr = NULL;
    int* aPtr;
-   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //will give garbage value because aFctPtr = NULL
+   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //Null Pointer
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
+
    printf("\n");
-   aFctPtr = &findmin;
-   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //will not give garbage value because aFctPtr = &findmin
+
+   aFctPtr = &findminQ9;
+   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //Non-Null Pointer
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
 
@@ -94,7 +84,7 @@ int main() {
    //stores each word
    char word[SIZE] = { '\0' };
    char input[SIZE] = { '\0' };
-   //stores a pointer to the 1st node in the linked list
+   //stores a pointer to the 1st node in the dictionary linked list
    NodePointer head = NULL;
    //keep inserting until user enters "quit"
    while (0 != strcmp(input, QUIT)) {
@@ -112,15 +102,16 @@ int main() {
 }
 //----------------------------------------------------------------------------------------------------
 
-//								 ---------------------------------
-//								 | INTERNAL FUNCTION DEFINITIONS |
-//								 ---------------------------------
+//								 --------------------------
+//								 |  FUNCTION DEFINITIONS  |
+//								 --------------------------
 /*
-* findmin definition.
+* findminQ9 definition, TO SHOW FOR DEMO
+* Q10 and onwards will use the one defined in selection.c (Internal)
 * receives an array of integers and returns a pointer to its smallest element
 */
-int* findmin(int* arr, int size) {
-	int smallestAddress = &arr[0];
+int* findminQ9(int* arr, int size) {
+	int smallestAddress = &arr[0]; 
 	int smallestValue = arr[0];
 
 	for (int i = 1; i < size; i++) {
@@ -130,135 +121,4 @@ int* findmin(int* arr, int size) {
 		}
 	}
 	return smallestAddress;
-}
-
-/*
-* findmax definition.
-* receives an array of integers and returns a pointer to its biggest element
-*/
-int* findmax(int* arr, int size) {
-	int biggestAddress = &arr[0];
-	int biggestValue = arr[0];
-
-	for (int i = 1; i < size; i++) {
-		if (arr[i] > biggestValue) {
-			biggestAddress = &arr[i];
-			biggestValue = arr[i];
-		}
-	}
-	return biggestAddress;
-}
-
-/*
-* SelectionSort, biggest to smallest. Hence, inverse.
-*/
-int* selectionsortInverse(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
-	int* maxPtr;
-	int temp;
-	int indexMax = 0;
-	int indexCurrent = 0;
-	int originalSize = size;
-
-	if (findminPtr == NULL) {
-		return maxPtr = findmax(array, size);
-	}
-	else {
-		while (size != 0) {
-
-			maxPtr = findmax(array, size);
-
-			for (int i = 0; i < size; i++) {
-				if (&array[i] == maxPtr) {
-					indexMax = i;
-				}
-			}
-			temp = array[indexCurrent];
-			array[indexCurrent] = array[indexMax];
-			array[indexMax] = temp;
-			array = array + 1;
-			size--;
-		}
-		return array = array - originalSize;
-	}
-}
-
-/*
-* findAvg definition.
-* Takes an array and its size and 
-* the avg of all the numbers of the array
-*/
-float findAvg(int* array, int size) {
-
-	float avg = 0;
-
-	for (int i = 0; i < size; i++) {
-		avg = avg + array[i];
-	}
-	avg = avg / size;
-	return avg;
-}
-
-/*
-* findSD definition.
-* finds the standard deviation from a given array and its size
-*/
-float findSD(int* array, int size) {
-	float sum = 0.0, mean, SD = 0.0;
-	int i;
-	for (i = 0; i < size; ++i) {
-		sum += array[i];
-	}
-	mean = sum / size;
-	for (i = 0; i < size; ++i)
-		SD += pow(array[i] - mean, 2);
-	return sqrt(SD / size);
-}
-
-/*
-* question12Output definition.
-* calls all other helper functions to output what Q12 asks for
-*/
-void question12Output(int* array, int size) {
-	int* ascendingArr;
-	int* ascendingFctPter = &findmin;
-	int* descendingArr;
-	int* descendingFctPter = &findmax;
-	int* minValue;
-	int* maxValue;
-	float average;
-	float sD;
-
-	//outputs array in ascending order
-	ascendingArr = selectionsortQ11(array, size, ascendingFctPter);
-	printf("Array Sorted in Ascending Order: ");
-	for (int i = 0; i < size; i++)
-		printf("%d ", ascendingArr[i]);
-	printf("\n");
-
-	//outputs array in descending order
-	descendingArr = selectionsortInverse(array, size, descendingFctPter);
-	printf("Array Sorted in Descending Order: ");
-	for (int i = 0; i < size; i++)
-		printf("%d ", descendingArr[i]);
-	printf("\n");
-
-	//finds the smallest integer in the array
-	minValue = findmin(array, size);
-	printf("Minimum Value is: %d", *minValue);
-	printf("\n");
-
-	//finds the biggest integer in the array
-	maxValue = findmax(array, size);
-	printf("Maximum Value is: %d", *maxValue);
-	printf("\n");
-
-	//finds the avg
-	average = findAvg(array, size);
-	printf("Average is: %f", average);
-	printf("\n");
-
-	//finds the standard deviation
-	sD = findSD(array, size);
-	printf("Standard Deviation is: %f", sD);
-	printf("\n");
 }

@@ -20,7 +20,7 @@ void selectionsort(int* array, int size);
 * receives a third argument, a pointer
 * to a "min" function, that is to be called by the sort implementation
 */
-int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int size));
+void selectionsortQ11(int* array, int size, void* (*findminPtr)(int* arr, int size));
 
 /*
 * function declaration for Q12 (local functions).
@@ -31,7 +31,7 @@ int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int siz
 */
 void question12Output(int* array, int size); //will call all functions below
 static int* findmax(int* arr, int size); //and findmin is in Q9 files.
-static int* selectionsortInverse(int* array, int size, int* (*findminPtr)(int* arr, int size)); //and selectionsortQ11 is in Q11 files
+static void selectionsortInverse(int* array, int size, void* (*findminPtr)(int* arr, int size)); //and selectionsortQ11 is in Q11 files
 static float findAvg(int* array, int size);
 static float findSD(int* array, int size);
 

@@ -1,5 +1,6 @@
 #include "selectionsort.h" //#include "selectionsort.h"
 #include "selectionsort.h" //#include "selectionsort.h" // included twice
+#include <stdio.h>
 
 //									     --------------------------
 //									     |     Q9 DECLARATIONS    |
@@ -14,9 +15,10 @@ int* findminQ9(int* arr, int size);
 //									    	-----------------
 //----------------------------------------------------------------------------------------------------
 int main() {
-    
+    printf("Original Input Array: { 1, 4, 5, 6, -1 }\n\n");
     //Question Q9
     printf("Question 9: \n");
+    printf("Find Minimum: ");
     int arr[] = { 1, 4, 5, 6, -1 };
     int* m = findminQ9(arr, 5);
     printf("%d", *m); // -1
@@ -27,6 +29,7 @@ int main() {
    //----------------------------------------------------------------------------------------------------
    //Question 10
    printf("Question 10: \n");
+   printf("Selection Sort: ");
    int i;
    selectionsort(arr, 5);
    for (i = 0; i < 5; i++) 
@@ -38,17 +41,21 @@ int main() {
    //----------------------------------------------------------------------------------------------------
    //Question 11
    printf("Question 11: \n");
+   printf("Selection Sort with NULL function pointer: ");
    int arr2[] = { 1, 4, 5, 6, -1 };
    int* aFctPtr = NULL;
    int* aPtr;
-   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //Null Pointer
+   selectionsortQ11(arr2, 5, NULL); //Null Pointer
+   aPtr = arr2;
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
 
    printf("\n");
 
+   printf("Selection Sort with a function pointer: ");
    aFctPtr = &findminQ9;
-   aPtr = selectionsortQ11(arr2, 5, aFctPtr); //Non-Null Pointer
+   selectionsortQ11(arr2, 5, aFctPtr); //Non-Null Pointer
+   aPtr = arr2;
    for (i = 0; i < 5; i++)
        printf("%d ", aPtr[i]);
 

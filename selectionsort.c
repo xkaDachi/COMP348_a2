@@ -6,16 +6,33 @@
 * receives an array of integers and returns a pointer to its smallest element
 */
 static int* findminQ10(int* arr, int size) {
-    int smallestAddress = &arr[0];
-    int smallestValue = arr[0];
+	int smallestAddress = &arr[0];
+	int smallestValue = arr[0];
 
-    for (int i = 1; i < size; i++) {
-        if (arr[i] < smallestValue) {
-            smallestAddress = &arr[i];
-            smallestValue = arr[i];
-        }
-    }
-    return smallestAddress;
+	for (int i = 1; i < size; i++) {
+		if (arr[i] < smallestValue) {
+			smallestAddress = &arr[i];
+			smallestValue = arr[i];
+		}
+	}
+	return smallestAddress;
+}
+
+/*
+* findmax definition.
+* receives an array of integers and returns a pointer to its biggest element
+*/
+static int* findmax(int* arr, int size) {
+	int biggestAddress = &arr[0];
+	int biggestValue = arr[0];
+
+	for (int i = 1; i < size; i++) {
+		if (arr[i] > biggestValue) {
+			biggestAddress = &arr[i];
+			biggestValue = arr[i];
+		}
+	}
+	return biggestAddress;
 }
 
 /*
@@ -47,11 +64,11 @@ void selectionsort(int* array, int size) {
 }
 
 /*
-* findMin definition with 3 arguments
+* selectionsort definition with 3 arguments
 * In case the pointer is NULL,
 * the default function (the original findmin) is to be called.
 */
-int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
+void selectionsortQ11(int* array, int size, void* (*findminPtr)(int* arr, int size)) {
     int* minPtr;
     int temp;
     int indexMin = 0;
@@ -81,8 +98,10 @@ int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int siz
     else {
         while (size != 0) {
 
+			minPtr = findminPtr(array, size);
+
             for (int i = 0; i < size; i++) {
-                if (&array[i] == findminPtr) {
+                if (&array[i] == minPtr) {
                     indexMin = i;
                 }
             }
@@ -97,39 +116,39 @@ int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int siz
 }
 
 /*
-* findmax definition.
-* receives an array of integers and returns a pointer to its biggest element
-*/
-static int* findmax(int* arr, int size) {
-	int biggestAddress = &arr[0];
-	int biggestValue = arr[0];
-
-	for (int i = 1; i < size; i++) {
-		if (arr[i] > biggestValue) {
-			biggestAddress = &arr[i];
-			biggestValue = arr[i];
-		}
-	}
-	return biggestAddress;
-}
-
-/*
 * SelectionSort, biggest to smallest. Hence, inverse.
 */
-static int* selectionsortInverse(int* array, int size, int* (*findminPtr)(int* arr, int size)) {
+static void selectionsortInverse(int* array, int size, void* (*findmaxPtr)(int* arr, int size)) {
 	int* maxPtr;
 	int temp;
 	int indexMax = 0;
 	int indexCurrent = 0;
 	int originalSize = size;
 
-	if (findminPtr == 0) {
-		return maxPtr = findmax(array, size);
-	}
-	else {
+	//is a NULL pointer
+	if (findmaxPtr == NULL) {
 		while (size != 0) {
 
 			maxPtr = findmax(array, size);
+
+			for (int i = 0; i < size; i++) {
+				if (&array[i] == maxPtr) {
+					indexMax = i;
+				}
+			}
+			temp = array[indexCurrent];
+			array[indexCurrent] = array[indexMax];
+			array[indexMax] = temp;
+			array = array + 1;
+			size--;
+		}
+		return array = array - originalSize;
+	}
+	//else is not a NULL pointer
+	else {
+		while (size != 0) {
+
+			maxPtr = findmaxPtr(array, size);
 
 			for (int i = 0; i < size; i++) {
 				if (&array[i] == maxPtr) {
@@ -194,14 +213,16 @@ void question12Output(int* array, int size) {
 	float sD;
 
 	//outputs array in ascending order
-	ascendingArr = selectionsortQ11(array, size, ascendingFctPter);
+	selectionsortQ11(array, size, ascendingFctPter);
+	ascendingArr = array;
 	printf("Array Sorted in Ascending Order: ");
 	for (int i = 0; i < size; i++)
 		printf("%d ", ascendingArr[i]);
 	printf("\n");
 
 	//outputs array in descending order
-	descendingArr = selectionsortInverse(array, size, descendingFctPter);
+	selectionsortInverse(array, size, descendingFctPter);
+	descendingArr = array;
 	printf("Array Sorted in Descending Order: ");
 	for (int i = 0; i < size; i++)
 		printf("%d ", descendingArr[i]);
@@ -219,11 +240,11 @@ void question12Output(int* array, int size) {
 
 	//finds the avg
 	average = findAvg(array, size);
-	printf("Average is: %f", average);
+	printf("Average is: %.2f", average);
 	printf("\n");
 
 	//finds the standard deviation
 	sD = findSD(array, size);
-	printf("Standard Deviation is: %f", sD);
+	printf("Standard Deviation is: %.2f", sD);
 	printf("\n");
 }

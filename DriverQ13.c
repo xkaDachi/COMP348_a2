@@ -27,11 +27,11 @@ void insert_dictionary_order(char string[]);
 void print_list();
 
 //									    	-----------------
-//									    	| MAIN FUNCTION |
+//									    	| main function |
 //									    	-----------------
 int main() {
-    //Question 13
-    printf("Question 13: \n");
+    //question 13
+    printf("Question 13: \n\n");
     //stores each word
     char word[SIZE] = { '\0' };
     char input[SIZE] = { '\0' };
@@ -39,10 +39,11 @@ int main() {
     NodePointer head = NULL;
     //keep inserting until user enters "quit"
     while ((0 != strcmp(input, QUIT)) && (0 != strcmp(input, EOF))) {
-        printf("Enter a word to INSERT into linked list (enter '.' or 'EOF' to quit): ");
+        printf(">>> Please enter a word to insert into the dictionary (enter '.' or 'EOF' to quit): ");
         gets(word);
+        printf("\n");
         strcpy(input, word);
-        char* token = strtok(word, " "); // Extract the first token
+        char* token = strtok(word, " "); // extract the first token
         while (token != NULL) { // loop through the string to extract all other tokens
             insert_dictionary_order(token);
             print_list();

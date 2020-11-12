@@ -103,18 +103,20 @@ void insert_dictionary_order(char string[]) {
 
 //prints the dictionary that is a linkedlist
 void print_list() {
+    NodePointer current = head;
+
     //for empty list
-    if (NULL == head) {
+    if (NULL == current) {
         printf("The Dictionary is empty!\n\n");
         return;
     }
     printf("Dictionary is the following: ");
     //loop through linkedlist
-    while (NULL != head) {
+    while (NULL != current) {
         //display each node
-        printf("%s -> ", head->data);
+        printf("%s -> ", current->data);
         //go to next node
-        head = head->next;
+        current = current->next;
     }
     printf("\n\n");
 }//end of function

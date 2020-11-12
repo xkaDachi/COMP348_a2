@@ -59,7 +59,7 @@ int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int siz
     int originalSize = size;
 
     //If it's a NULL function pointer
-    if (findminPtr == 0) {
+    if (findminPtr == NULL) {
         while (size != 0) {
 
             minPtr = findminQ10(array, size);

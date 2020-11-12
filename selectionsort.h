@@ -6,6 +6,7 @@
 /*
 * findmin declaration for Q10, 
 * INTERNAL LINKAGE.
+* EITHER STATIC OR NO DECLARATION IN .H
 */
 static int* findminQ10(int* arr, int size);
 
@@ -26,7 +27,7 @@ int* selectionsortQ11(int* array, int size, int* (*findminPtr)(int* arr, int siz
 * read an array of n integers, sorts them in both ascending and descending order,
 * and prints the sorted arrays, along with the minimum, maximum, average, and the standard deviation
 * findmax function is to be implemented locally in the main program.
-* INTERNAL LINKAGE FOR ALL EXCEPT question12Output
+* INTERNAL LINKAGE FOR ALL EXCEPT question12Output BELOW EITHER STATIC OR NO DECLARATION IN .H
 */
 void question12Output(int* array, int size); //will call all functions below
 static int* findmax(int* arr, int size); //and findmin is in Q9 files.

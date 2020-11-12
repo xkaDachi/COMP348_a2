@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "selectionsort.h" //#include "selectionsort.h"
 #include "selectionsort.h" //#include "selectionsort.h" // included twice
-#include <math.h>
 #include "Q13.h"
 
 //									 --------------------------
@@ -87,8 +86,8 @@ int main() {
    //stores a pointer to the 1st node in the dictionary linked list
    NodePointer head = NULL;
    //keep inserting until user enters "quit"
-   while (0 != strcmp(input, QUIT)) {
-	   printf("Enter a word to INSERT into linked list (enter '.' to quit): ");
+   while ((0 != strcmp(input, QUIT)) && (0 != strcmp(input, EOF))) {
+	   printf("Enter a word to INSERT into linked list (enter '.' or 'EOF' to quit): ");
 	   gets(word);
 	   strcpy(input, word);
 	   char* token = strtok(word, " "); // Extract the first token

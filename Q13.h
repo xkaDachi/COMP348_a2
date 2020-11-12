@@ -2,6 +2,7 @@
 #define Q13_H
 
 #define QUIT "." //end the loop call with user input as '.'
+#define EOF "EOF" //end the loop call with user input as ''EOF''
 #define SIZE 255
 
 /*

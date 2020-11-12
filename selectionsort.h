@@ -1,6 +1,8 @@
 #ifndef SELECTIONSORT_H
 #define SELECTIONSORT_H
 
+#include <math.h>
+
 /*
 * findmin declaration for Q10, 
 * INTERNAL LINKAGE.
